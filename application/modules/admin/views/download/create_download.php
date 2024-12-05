@@ -5,7 +5,7 @@
             <h3 class="uk-h3"><i class="fas fa-download"></i> <?= $this->lang->line('placeholder_create_download'); ?></h3>
           </div>
           <div class="uk-width-auto">
-            <a href="<?= base_url('admin/download'); ?>" class="uk-icon-button"><i class="fas fa-arrow-circle-left"></i></a>
+            <a href="<?= base_url('admin/download'); ?>" class="uk-icon-button"><i class="fas fa-arrow-left"></i></a>
           </div>
         </div>
         <div class="uk-card uk-card-default">
@@ -39,7 +39,7 @@
                   <label class="uk-form-label"><?= $this->lang->line('option_image'); ?></label>
                   <div class="uk-form-controls">
                     <div class="uk-inline uk-width-1-1">
-                      <span class="uk-form-icon uk-form-icon-flip"><i class="fab fa-font-awesome-flag"></i></span>
+                      <span class="uk-form-icon uk-form-icon-flip"><i class="fas fa-image"></i></span>
                       <input class="uk-input" type="text" id="down_image" placeholder="<?= $this->lang->line('option_image'); ?>" required>
                     </div>
                   </div>

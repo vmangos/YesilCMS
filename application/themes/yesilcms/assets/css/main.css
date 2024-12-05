@@ -4,7 +4,7 @@
   font-weight: 400;
   font-display: swap;
   src: url("../fonts/lobster-regular-webfont.woff2") format("woff2"),
-    url("../fonts/lobster-regular-webfont.woff") format("woff");
+  url("../fonts/lobster-regular-webfont.woff") format("woff");
 }
 
 html {
@@ -78,8 +78,8 @@ h6,
 .uk-navbar-nav > li > a,
 .uk-navbar-toggle {
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  min-height: 40px;
+  font-weight: 500;
+  min-height: 50px;
 }
 
 .uk-navbar-nav > li > a,
@@ -125,13 +125,17 @@ h6,
 }
 
 .uk-navbar-dropdown {
-  background: linear-gradient(#1c2534, #161a26);
+  background: linear-gradient(#25160f, #281b0f);
   border-width: 0 1px 1px 1px;
   border-style: solid;
   border-color: rgba(255, 255, 255, 0.05);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
   min-width: 180px;
   padding: 10px 0;
+}
+
+.uk-navbar-nav > li > a:active {
+  color: #f8b700;
 }
 
 .uk-navbar-dropdown .blizzcms-cart-dropdown {
@@ -201,6 +205,35 @@ h6,
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0, transparent);
 }
 
+.yesilcms-overlay-primary {
+  background: #211510 url(../images/navbar_bg.jpg) repeat-x 80px 0;
+  background-size: auto 100%;
+  -webkit-box-shadow: 0 0 10px rgb(0 0 0 / 60%);
+  box-shadow: 0 0 10px rgb(0 0 0 / 60%);
+
+}
+
+.yesilcms-subnav-divider::before {
+  margin-right: 5px;
+}
+
+@media screen and (min-width: 640px) {
+  .yesilcms-overlay-primary {
+    margin-left: 5%;
+    max-width: 40%;
+    min-height: 50%;
+  }
+
+  .yesilcms-sticky-active {
+    -webkit-box-shadow: 0 5px 10px rgb(0 0 0 / 60%);
+    box-shadow: 0 5px 10px rgb(0 0 0 / 60%);
+  }
+
+  .uk-navbar-nav.nav-gap {
+    gap: 40px;
+  }
+}
+
 .main-section {
   border-top: 1px solid rgba(63, 102, 133, 0.5);
 }
@@ -261,6 +294,10 @@ h6,
   transition: all ease-in 0.2s;
 }
 
+.news-img {
+  max-height:500px;
+}
+
 .uk-card-media-left:after {
   content: "";
   position: absolute;
@@ -277,7 +314,7 @@ h6,
 }
 
 .uk-card-hover:hover.uk-card-default.news-card:after {
-  border-color: #00aeff;
+  border-color: #f8b700;
 }
 
 .uk-card-body {
@@ -311,11 +348,11 @@ h6,
 .card-status {
   border: 1px solid transparent;
   box-shadow: 0 15px 10px -15px rgba(0, 0, 0, 0.6),
-    inset 0 0 5px rgba(0, 0, 0, 0.4);
+  inset 0 0 5px rgba(0, 0, 0, 0.4);
   border-image: linear-gradient(
-    to left,
-    rgba(255, 0, 0, 0.8) 0%,
-    rgba(0, 174, 255, 0.8) 100%
+          to left,
+          rgba(255, 0, 0, 0.8) 0%,
+          rgba(0, 174, 255, 0.8) 100%
   );
   border-image-slice: 1;
   border-image-width: 1px;
@@ -407,7 +444,7 @@ h6,
   transition: all ease .3s;*/
 
   transition: color 500ms, fill 500ms, background-color 500ms,
-    border-color 500ms;
+  border-color 500ms;
   outline: none;
   font-weight: 700;
   background-color: #006fb2;
@@ -624,11 +661,11 @@ h6,
 
 .uk-tile.alliance-bar {
   background: linear-gradient(
-    to bottom,
-    #1e7fe1 0%,
-    #1e7fe1 50%,
-    #196bbd 51%,
-    #196bbd 100%
+          to bottom,
+          #1e7fe1 0%,
+          #1e7fe1 50%,
+          #196bbd 51%,
+          #196bbd 100%
   );
   border-width: 1px 0 1px 1px;
   border-style: solid;
@@ -642,11 +679,11 @@ h6,
 
 .uk-tile.horde-bar {
   background: linear-gradient(
-    to bottom,
-    #e11e1e 0%,
-    #e11e1e 50%,
-    #bd1919 51%,
-    #bd1919 100%
+          to bottom,
+          #e11e1e 0%,
+          #e11e1e 50%,
+          #bd1919 51%,
+          #bd1919 100%
   );
   border-width: 1px 1px 1px 0;
   border-style: solid;
@@ -708,8 +745,8 @@ h6,
   font-size: 1rem;
 }
 
-.uk-subnav-divider.subnav-points
-  > :nth-child(n + 2):not(.uk-first-column)::before {
+.uk-subnav-divider.subnav-points,
+> :nth-child(n + 2):not(.uk-first-column)::before {
   margin-right: 10px;
   border-left-color: rgba(255, 255, 255, 0.15);
 }
@@ -755,14 +792,24 @@ h6,
   font-size: 0.875rem;
 }
 
+.uk-table-xsmall td,
+.uk-table-xsmall th {
+  padding: 5px 8px;
+  font-size: 0.875rem;
+}
+
+@media screen and (max-width: 640px) {
+  .uk-pagination > * {
+    padding: 5px;
+  }
+}
+
 .uk-pagination > * {
-  padding-left: 8px;
+  padding-left: 5px;
 }
 
 .uk-pagination > * > * {
   display: flex;
-  background: #0e86ca;
-  border: 1px solid #00aeff;
   color: #fff;
   font-size: 0.875rem;
   font-weight: 700;
@@ -770,19 +817,16 @@ h6,
   padding: 0 10px;
   align-items: center;
   justify-content: center;
-  transition: all ease-in-out 0.15s;
+  cursor: pointer;
+  transition: all ease-in-out 0.3s;
 }
 
-.uk-pagination > * > :focus,
 .uk-pagination > * > :hover {
-  background-color: #00aeff;
-  border-color: #00aeff;
-  color: #fff;
+  color: #f8b700;
 }
 
 .uk-pagination > .uk-active > * {
-  background-color: #00aeff;
-  border-color: #00aeff;
+  background-color: #f8b700;
   color: #fff;
 }
 
@@ -916,7 +960,7 @@ h6,
   background: rgba(0, 0, 0, 0.15);
   cursor: default;
   box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
+  0 0 0 1px rgba(255, 255, 255, 0.1);
   padding: 5px;
 }
 
@@ -1129,7 +1173,16 @@ tbody tr:last-child {
   border-bottom: none;
 }
 
-/* Quick fix for item tooltip */
+/* Quick fix for item tooltip and pvp ladder */
+.uk-table-striped tbody tr:nth-of-type(odd), .uk-table-striped > tr:nth-of-type(odd) {
+  background: #271a13;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+
+.uk-table-striped tbody tr:nth-of-type(2n):last-child, .uk-table-striped > tr:nth-of-type(2n):last-child {
+  border-bottom: 1px solid #242424;
+}
 
 .uk-dotnav > .uk-active > *,
 .uk-dotnav > * > :active {
@@ -1139,6 +1192,11 @@ tbody tr:last-child {
 .uk-table-hover tbody tr:hover,
 .uk-table-hover > tr:hover {
   background: rgba(255, 255, 255, 0.05);
+}
+
+.uk-table-striped tbody tr:nth-of-type(odd):hover,
+.uk-table-striped > tr:nth-of-type(odd):hover {
+  background: rgba(255, 255, 255, 0.10);
 }
 
 .uk-grid-divider > :not(.uk-first-column)::before {
@@ -1167,7 +1225,7 @@ tbody tr:last-child {
 
 .topic-author-staff .topic-author-avatar {
   box-shadow: 0 0 0 1px rgb(255 255 255 / 30%), 0 0 0 3px #00aeff,
-    0 0 0 4px black, 0 0 15px 5px rgb(0 174 255 / 75%);
+  0 0 0 4px black, 0 0 15px 5px rgb(0 174 255 / 75%);
 }
 
 .topic-author-avatar img {
@@ -1202,7 +1260,7 @@ tbody tr:last-child {
 
 .author-rank-staff {
   box-shadow: 0 0 0 1px rgb(255 255 255 / 30%), 0 0 0 3px #00aeff,
-    0 0 0 4px black, 0 0 5px 4px rgb(0 174 255 / 75%);
+  0 0 0 4px black, 0 0 5px 4px rgb(0 174 255 / 75%);
   background-color: #00aeff;
   border-radius: 2px;
   color: #fff;
@@ -1270,20 +1328,20 @@ option:not(:hover) {
 
 select.minimal {
   background-image: linear-gradient(45deg, transparent 50%, #fff 50%),
-    linear-gradient(135deg, #fff 50%, transparent 50%),
-    linear-gradient(to right, #fff, #fff);
+  linear-gradient(135deg, #fff 50%, transparent 50%),
+  linear-gradient(to right, #fff, #fff);
   background-position: calc(100% - 20px) calc(1em + 2px),
-    calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
+  calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
   background-size: 5px 5px, 5px 5px, 1px 1.5em;
   background-repeat: no-repeat;
 }
 
 select.minimal:focus {
   background-image: linear-gradient(45deg, #39f 50%, transparent 50%),
-    linear-gradient(135deg, transparent 50%, #39f 50%),
-    linear-gradient(to right, #39f, #39f);
+  linear-gradient(135deg, transparent 50%, #39f 50%),
+  linear-gradient(to right, #39f, #39f);
   background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em,
-    calc(100% - 2.5em) 0.5em;
+  calc(100% - 2.5em) 0.5em;
   background-size: 5px 5px, 5px 5px, 1px 1.5em;
   background-repeat: no-repeat;
   border-color: #00aeff;
@@ -1320,9 +1378,8 @@ span.system {
 }
 
 .footer-icon {
-  font-size: 1.75rem;
   color: #f8b700;
-  padding: 0 5px;
+  padding: 5px 5px;
   display: inline-block;
   vertical-align: middle !important;
 }
@@ -1345,6 +1402,7 @@ main {
   align-items: center;
   justify-content: center;
 }
+
 .um-cog {
   margin: 100px 0 35px 0;
 }
@@ -1366,4 +1424,185 @@ main {
   font-size: 1.5em;
   font-weight: 100;
   margin: 15px 0 100px 0 !important;
+}
+
+button.fact-both, button.fact-alliance, button.fact-horde,
+button.interval-all-times, button.interval-last-week {
+  background: none;
+}
+
+
+button.fact-both.uk-active {
+  background-color: #d99e19;
+}
+
+button.fact-alliance.uk-active {
+  background-color: #03a9f4;
+}
+
+button.fact-horde.uk-active {
+  background-color: #f44336;
+}
+
+button.interval-all-times.uk-active {
+  background-color: #4caf50;
+}
+
+button.interval-last-week.uk-active {
+  background-color: #9c27b0;
+}
+
+.pad-3 {
+  padding-left: 5px;
+}
+
+.uk-button-pvp {
+  line-height: 36px;
+  padding: 0 15px;
+}
+
+.pvp-name {
+  padding-left: 0.5rem;
+}
+
+.pvp-name-Alliance {
+  color: #03a9f4;
+}
+
+.pvp-name-Horde {
+  color: #f44336;
+}
+
+.pvp-kill-hk {
+  color: #1eff00;
+}
+
+.pvp-kill-dk {
+  color: #ff4040;
+}
+
+.pvp-honor {
+  color: #71d5ff;
+}
+
+.pvp-rank {
+  color: #ffc107;
+}
+
+.pvp-today-hk {
+  color: #97d84c;
+}
+
+.pvp-today-dk {
+  color: #ff7070;
+}
+
+.pvp-yesterday-hk {
+  color: #A3F7BF;
+}
+
+.pvp-yesterday-dk {
+  color: #FA9494;
+}
+
+.pvp-ladder-logged-a {
+  background: rgb(33 150 243 / 20%) !important;
+}
+
+.pvp-ladder-logged-a:hover {
+  background: rgb(33 150 243 / 30%) !important;
+}
+
+.pvp-ladder-logged-h {
+  background: rgb(244 67 54 / 20%) !important;
+}
+
+.pvp-ladder-logged-h:hover {
+  background: rgb(244 67 54 / 30%) !important;
+}
+
+.dataTables_length {
+  float: left
+}
+
+.dataTables_filter {
+  float: right
+}
+
+div.dataTables_processing {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+}
+
+div.dataTables_processing > div:last-child {
+  position: relative;
+  width: 80px;
+  height: 15px;
+  margin: 1em auto;
+}
+
+div.dataTables_processing > div:last-child > div {
+  position: absolute;
+  top: 0;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #d99e19;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+div.dataTables_processing > div:last-child > div:nth-child(1) {
+  background: #03a9f4;
+  left: 8px;
+  animation: datatables-loader-1 0.6s infinite;
+}
+
+div.dataTables_processing > div:last-child > div:nth-child(2) {
+  background: #f44336;
+  left: 8px;
+  animation: datatables-loader-2 0.6s infinite;
+}
+
+div.dataTables_processing > div:last-child > div:nth-child(3) {
+  background: #e7e5e8;
+  left: 32px;
+  animation: datatables-loader-2 0.6s infinite;
+}
+
+div.dataTables_processing > div:last-child > div:nth-child(4) {
+  left: 56px;
+  animation: datatables-loader-3 0.6s infinite;
+}
+
+@keyframes datatables-loader-1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes datatables-loader-3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes datatables-loader-2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+
+table.dataTable td.dataTables_empty {
+  text-align: center;
 }

@@ -3,9 +3,9 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @property bool|object $auth
- * @property             $wowmodule
- * @property             $config_writer
+ * @property CI_DB_query_builder $auth
+ * @property Module_model        $wowmodule
+ * @property Config_Writer       $config_writer
  */
 class Home_model extends CI_Model
 {
@@ -50,7 +50,7 @@ class Home_model extends CI_Model
     public function updateconfigs($data)
     {
         $this->load->library('config_writer');
-        $blizz = $this->config_writer->get_instance(APPPATH . 'config/blizzcms.php', 'config');
+        $blizz = $this->config_writer->get_instance(APPPATH . 'config/yesilcms.php', 'config');
 
         if ($this->config_writer->isEnabled($data['bnet'])) {
             $bnet_enable = true;

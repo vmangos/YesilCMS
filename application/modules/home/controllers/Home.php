@@ -3,12 +3,12 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @property $wowgeneral
- * @property $home_model
- * @property $news_model
- * @property $admin_model
- * @property $wowrealm
- * @property $template
+ * @property General_model $wowgeneral
+ * @property Home_model    $home_model
+ * @property News_model    $news_model
+ * @property Admin_model   $admin_model
+ * @property Realm_model   $wowrealm
+ * @property Template      $template
  */
 class Home extends MX_Controller
 {
@@ -31,14 +31,14 @@ class Home extends MX_Controller
     public function index()
     {
         if ($this->config->item('migrate_status') == '1') {
-            $data = array(
+            $data = [
                 'lang' => $this->lang->lang()
-            );
+            ];
             $this->load->view('migrate', $data);
         } else {
             $discord = $this->home_model->getDiscordInfo();
 
-            $data = array(
+            $data = [
                 'pagetitle'      => $this->lang->line('tab_home'),
                 'slides'         => $this->home_model->getSlides()->result(),
                 'NewsList'       => $this->news_model->getNewsList()->result(),
@@ -49,7 +49,7 @@ class Home extends MX_Controller
                 'discord_icon'   => $discord['guild']['icon'],
                 'discord_name'   => $discord['guild']['name'],
                 'discord_counts' => $discord['approximate_presence_count'],
-            );
+            ];
 
             $this->template->build('home', $data);
         }
@@ -67,7 +67,7 @@ class Home extends MX_Controller
 
             http_response_code(404);
 
-            echo json_encode(array("message" => "No realmlist has been set yet."));
+            echo json_encode(["message" => "No realmlist has been set yet."]);
         }
         die();
     }
@@ -85,43 +85,47 @@ class Home extends MX_Controller
 
     public function setconfig()
     {
-        $this->load->library('migration');
-
-        $data = array(
-            'name'       => $this->input->post('website_name'),
-            'invitation' => $this->input->post('website_invitation'),
-            'realmlist'  => $this->input->post('website_realmlist'),
-            'expansion'  => $this->input->post('website_expansion'),
-            'bnet'       => $this->input->post('website_bnet'),
-            'emulator'   => $this->input->post('website_emulator')
-        );
-
-        $realmid   = $this->input->post('realm_id');
-        $char_host = $this->input->post('character_hostname');
-        $char_db   = $this->input->post('character_database');
-        $char_user = $this->input->post('character_username');
-        $char_pass = $this->input->post('character_password');
-        $soap_host = $this->input->post('soap_hostname');
-        $soap_port = $this->input->post('soap_port');
-        $soap_user = $this->input->post('soap_username');
-        $soap_pass = $this->input->post('soap_password');
-        $emulator  = $this->input->post('emulator');
-
-        // If OS is Windows, redis is not officially supported, so don't add it to checklist
-        if (! strcasecmp(substr(PHP_OS, 0, 3), 'WIN') == 0) {
-            $data[] = ['redis' => $this->input->post('redis')];
-        } else {
-            $data[] = ['redis' => false];
-        }
-
-        $this->home_model->updateconfigs($data);
-
-        if ($this->migration->current() === false) {
-            show_error($this->migration->error_string());
-        } else {
-            $this->home_model->insertRealm($char_host, $char_user, $char_pass, $char_db, $realmid, $soap_host, $soap_user, $soap_pass, $soap_port, $emulator);
-            sleep(3); //make sure redirected to correct location
+        if ($this->config->item('migrate_status') === false) {
             redirect(base_url());
+        }else{
+            $this->load->library('migration');
+
+            $data = [
+                'name'       => $this->input->post('website_name'),
+                'invitation' => $this->input->post('website_invitation'),
+                'realmlist'  => $this->input->post('website_realmlist'),
+                'expansion'  => $this->input->post('website_expansion'),
+                'bnet'       => $this->input->post('website_bnet'),
+                'emulator'   => $this->input->post('website_emulator')
+            ];
+
+            $realmid   = $this->input->post('realm_id');
+            $char_host = $this->input->post('character_hostname');
+            $char_db   = $this->input->post('character_database');
+            $char_user = $this->input->post('character_username');
+            $char_pass = $this->input->post('character_password');
+            $soap_host = $this->input->post('soap_hostname');
+            $soap_port = $this->input->post('soap_port');
+            $soap_user = $this->input->post('soap_username');
+            $soap_pass = $this->input->post('soap_password');
+            $emulator  = $this->input->post('emulator');
+
+            // If OS is Windows, redis is not officially supported, so don't add it to checklist
+            if (! strcasecmp(substr(PHP_OS, 0, 3), 'WIN') == 0) {
+                $data['redis'] = $this->input->post('website_redis');
+            } else {
+                $data['redis'] = false;
+            }
+
+            $this->home_model->updateconfigs($data);
+
+            if ($this->migration->current() === false) {
+                show_error($this->migration->error_string());
+            } else {
+                $this->home_model->insertRealm($char_host, $char_user, $char_pass, $char_db, $realmid, $soap_host, $soap_user, $soap_pass, $soap_port, $emulator);
+                sleep(3); //make sure redirected to correct location
+                redirect(base_url());
+            }
         }
     }
 }

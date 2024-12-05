@@ -16,27 +16,32 @@
                 ?>
                 <li>
                     <div class="uk-overflow-auto uk-margin-small">
-                        <table class="uk-table dark-table uk-table-divider uk-table-small">
+                        <table class="uk-table dark-table uk-table-hover uk-table-divider uk-table-small">
                             <thead>
                             <tr>
-                                <th class="uk-table-expand"><i class="fas fa-user"></i> <?= $this->lang->line('table_header_name'); ?></th>
-                                <th class="uk-table-expand uk-text-center"><i class="fas fa-info-circle"></i> <?= $this->lang->line('table_header_level'); ?></th>
-                                <th class="uk-table-expand uk-text-center"><i class="fas fa-user-tag"></i> <?= $this->lang->line('table_header_faction'); ?></th>
-                                <th class="uk-table-expand uk-text-center"><i class="fas fa-user-tag"></i> <?= $this->lang->line('table_header_race'); ?></th>
-                                <th class="uk-table-expand uk-text-center"><i class="fas fa-user-tag"></i> <?= $this->lang->line('table_header_class'); ?></th>
-                                <th class="uk-table-expand uk-text-center"><i class="fas fa-location-arrow"></i> <?= $this->lang->line('table_header_zone'); ?></th>
+                                <th class="uk-table-expand"><?= $this->lang->line('table_header_name'); ?></th>
+                                <th class="uk-table-expand uk-text-center"><?= $this->lang->line('table_header_level'); ?></th>
+                                <th class="uk-table-expand uk-text-center"></i> <?= $this->lang->line('table_header_faction'); ?></th>
+                                <th class="uk-table-expand uk-text-center"><?= $this->lang->line('table_header_race'); ?></th>
+                                <th class="uk-table-expand uk-text-center"><?= $this->lang->line('table_header_class'); ?></th>
+                                <th class="uk-table-expand uk-text-center"><?= $this->lang->line('table_header_zone'); ?></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php if ($this->online_model->getOnlinePlayers($multiRealm)->result()):
-                                foreach ($this->online_model->getOnlinePlayers($multiRealm)->result() as $online): ?>
+                            <?php $result = $this->online_model->getOnlinePlayers($multiRealm)->result();
+                            if ($result):
+                                foreach ($result as $online):
+                                    $faction = $this->wowgeneral->getFaction($online->race); ?>
                                     <tr>
-                                        <td class="uk-text-capitalize"><?= $online->name ?></td>
-                                        <td class="uk-text-center"><?= $online->level ?></td>
-                                        <td class="uk-text-center"><img class="uk-border-rounded" src="<?= base_url('assets/images/factions/' . $this->wowgeneral->getFactionIcon($online->race)); ?>" width="20" height="20" title="<?= $this->wowgeneral->getFaction($online->race); ?>" alt="<?= $this->wowgeneral->getFaction($online->race); ?>"></td>
-                                        <td class="uk-text-center"><img class="uk-border-rounded" src="<?= base_url('assets/images/races/' . $this->wowgeneral->getRaceIcon($online->race)); ?>" width="20" height="20" title="<?= $this->wowgeneral->getRaceName($online->race); ?>" alt="<?= $this->wowgeneral->getRaceName($online->race); ?>"></td>
-                                        <td class="uk-text-center"><img class="uk-border-rounded" src="<?= base_url('assets/images/class/' . $this->wowgeneral->getClassIcon($online->class)); ?>" width="20" height="20" title="<?= $this->wowgeneral->getClassName($online->class); ?>" alt="<?= $this->wowgeneral->getClassName($online->class); ?>"></td>
-                                        <td class="uk-text-center"><?= $this->wowgeneral->getSpecifyZone($online->zone); ?></td>
+                                        <td class="uk-text-capitalize uk-text-middle"><a class="pvp-name-<?= $faction ?>" href="<?= base_url() . 'armory/character/' . $charsMultiRealm->id . '/' ?><?= $online->guid ?>"><?= $online->name ?></td>
+                                        <td class="uk-text-center uk-text-middle"><?= $online->level ?></td>
+                                        <td class="uk-text-center uk-text-middle"><img class="uk-border-rounded" src="<?= base_url('assets/images/factions/' . $this->wowgeneral->getFactionIcon($online->race)); ?>" width="32" height="32" title="<?= $this->wowgeneral->getFaction($online->race); ?>"
+                                                                                       alt="<?= $this->wowgeneral->getFaction($online->race); ?>"></td>
+                                        <td class="uk-text-center uk-text-middle"><img class="uk-border-rounded" src="<?= base_url() . 'application/modules/armory/assets/images/characters/' . getAvatar($online->class, $online->race, $online->gender, $online->level) ?>" width="32" height="32"
+                                                                                       title="<?= $this->wowgeneral->getRaceName($online->race); ?>" alt="<?= $this->wowgeneral->getRaceName($online->race); ?>"></td>
+                                        <td class="uk-text-center uk-text-middle"><img class="uk-border-rounded" src="<?= base_url('assets/images/class/' . $this->wowgeneral->getClassIcon($online->class)); ?>" width="32" height="32" title="<?= $this->wowgeneral->getClassName($online->class); ?>"
+                                                                                       alt="<?= $this->wowgeneral->getClassName($online->class); ?>"></td>
+                                        <td class="uk-text-center uk-text-middle"><?= $this->wowgeneral->getSpecifyZone($online->zone); ?></td>
                                     </tr>
                                 <?php endforeach;
                             else: ?>
@@ -52,3 +57,10 @@
         </ul>
     </div>
 </section>
+<script>
+    $('tr').click(function () {
+        window.location = $(this).find('a').attr('href');
+    }).hover(function () {
+        $(this).toggleClass('hover');
+    });
+</script>
